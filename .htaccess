@@ -1,0 +1,17 @@
+# Denegar acceso a archivos y directorios
+Options -Indexes
+
+# Proteger archivos sensibles
+<FilesMatch "^(config\.php|db\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Redirigir errores
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+
+# Forzar HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
